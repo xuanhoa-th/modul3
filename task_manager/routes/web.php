@@ -43,4 +43,6 @@ Route::prefix('customer')->group(function (){
     Route::delete('{id}', function () {
         // Xóa thông tin dữ liệu khách hàng
     });
+
+    Route::resource('customers', 'CustomerController');
 });

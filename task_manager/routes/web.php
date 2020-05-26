@@ -52,8 +52,7 @@ Route::get('/', function () {
 
 Route::group(['prefix'=>'customers'],function(){
 //    dd("ok route");
-    Route::get('/','CustomerController@index')->name('customers.index');
-//    Route::get('/', 'TaskController@index')->name('tasks.index');
+    Route::get('/', 'CustomerController@index')->name('customers.index');
 //    Route::get('create', 'TaskController@create')->name('tasks.create');
 //    Route::post('/', 'TaskController@store')->name('tasks.show');
 //    Route::get('/{taskId}', 'TaskController@show')->name('tasks.store');
@@ -61,4 +60,16 @@ Route::group(['prefix'=>'customers'],function(){
 //    Route::PUT('/{taskId}', 'TaskController@update')->name('tasks.update');
 //    Route::DELETE('/{photo}', 'TaskController@destroy')->name('	tasks.destroy');
 });
+Route::group(['prefix'=>'tasks'],function(){
+//    dd("ok route");
+    Route::get('/', 'TaskController@index')->name('tasks.index');
+//    Route::get('create', 'TaskController@create')->name('tasks.create');
+//    Route::post('/', 'TaskController@store')->name('tasks.show');
+//    Route::get('/{taskId}', 'TaskController@show')->name('tasks.store');
+//    Route::get('/{taskId}/edit', 'TaskController@edit')->name('tasks.edit');
+//    Route::PUT('/{taskId}', 'TaskController@update')->name('tasks.update');
+//    Route::DELETE('/{photo}', 'TaskController@destroy')->name('	tasks.destroy');
+});
+
+Route::get('category','CategoriesController@index');
 

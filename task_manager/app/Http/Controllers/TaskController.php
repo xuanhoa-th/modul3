@@ -8,8 +8,8 @@ namespace App\Http\Controllers;
 class TaskController
 {
     public function index(){
-        dd('ok index');
-//        return view('tasks.index');
+        $tasks =Task::all();
+     return view('index', compact('tasks'));
     }
     public function create(){
 

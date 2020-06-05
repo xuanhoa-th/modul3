@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 //Route::prefix('customer')->group(function (){
 //    Route::get('index', function (){
@@ -51,25 +51,27 @@ Route::get('/', function () {
 
 
 Route::group(['prefix'=>'customers'],function(){
-//    dd("ok route");
-    Route::get('/', 'CustomerController@index')->name('customers.index');
-//    Route::get('create', 'TaskController@create')->name('tasks.create');
-//    Route::post('/', 'TaskController@store')->name('tasks.show');
-//    Route::get('/{taskId}', 'TaskController@show')->name('tasks.store');
-//    Route::get('/{taskId}/edit', 'TaskController@edit')->name('tasks.edit');
-//    Route::PUT('/{taskId}', 'TaskController@update')->name('tasks.update');
-//    Route::DELETE('/{photo}', 'TaskController@destroy')->name('	tasks.destroy');
+//    Route::get('/', 'CustomerController@index')->name('customers.index');
+    Route::get('/create','CustomerController@create')->name('customers.create');
+    Route::post('/create','CustomerController@store')->name('customers.store');
+    Route::get('/{id}/edit','CustomerController@edit')->name('customers.edit');
+    Route::post('/{id}/edit','CustomerController@update')->name('customers.update');
+    Route::get('/{id}/destroy','CustomerController@destroy')->name('customers.destroy');
 });
 Route::group(['prefix'=>'tasks'],function(){
-//    dd("ok route");
+
     Route::get('/', 'TaskController@index')->name('tasks.index');
-//    Route::get('create', 'TaskController@create')->name('tasks.create');
-//    Route::post('/', 'TaskController@store')->name('tasks.show');
-//    Route::get('/{taskId}', 'TaskController@show')->name('tasks.store');
-//    Route::get('/{taskId}/edit', 'TaskController@edit')->name('tasks.edit');
-//    Route::PUT('/{taskId}', 'TaskController@update')->name('tasks.update');
-//    Route::DELETE('/{photo}', 'TaskController@destroy')->name('	tasks.destroy');
+    Route::get('create', 'TaskController@create')->name('tasks.create');
+    Route::post('/', 'TaskController@store')->name('tasks.show');
+    Route::get('/{taskId}', 'TaskController@show')->name('tasks.store');
+    Route::get('/{taskId}/edit', 'TaskController@edit')->name('tasks.edit');
+    Route::PUT('/{taskId}', 'TaskController@update')->name('tasks.update');
+    Route::DELETE('/{photo}', 'TaskController@destroy')->name('	tasks.destroy');
 });
 
 Route::get('category','CategoriesController@index');
+Route::middleware(['setLocale'])->group(function (){
+    Route::get('customer', 'CustomerController@index')->name('customers.index');
+});
+Route::post('change-language','LanguageController@setLocale')->name('setLocale ');
 

@@ -1,40 +1,67 @@
 @extends('home')
-@section('title', 'Danh sách tỉnh thành')
-@section('content')
-    <div class="col-12">
-        <div class="row">
-            <div class="col-12">
-                <h1>Danh Sách Khách Hàng</h1>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tên tỉnh thành</th>
-                    <th scope="col">Số khách hàng</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                @if(count($cities) == 0)
-                    <tr>
-                        <td colspan="4">Không có dữ liệu</td>
-                    </tr>
-                @else
-                    @foreach($cities as $key => $citie)
-                        <tr>
-                            <th scope="row">{{ ++$key }}</th>
-                            <td>{{ $citie->name }}</td>
-                            <td>{{ count($citie->customers) }}</td>
-                            <td><a href="">sửa</a></td>
-                            <td><a href="" class="text-danger" onclick="return confirm('Bạn chắc chắn muốn xóa?')">xóa</a></td>
-                        </tr>
-                    @endforeach
-                @endif
-                </tbody>
-            </table>
-            <a class="btn btn-primary" href="">Thêm mới</a>
-        </div>
-    </div>
-@endsection
+@section('main')
+   <div class="container">
+       <div class="col-12 mt-4">
+           <h1>Danh sach tỉnh thành</h1>
+       </div>
+       <a class="btn btn-primary" href="{{route('cities.create')}}">Thêm mới</a>
+       <div class="col-6">
+
+           <form class="navbar-form navbar-left" action="{{'cities.search'}}">
+
+               @csrf
+
+               <div class="row">
+
+                   <div class="col-8">
+
+                       <div class="form-group">
+
+                           <input type="text" class="form-control"  name="keyword" placeholder="Search">
+
+                       </div>
+
+                   </div>
+
+                   <div class="col-4">
+
+                       <button type="submit" class="btn btn-default">Tìm kiếm</button>
+
+                   </div>
+
+               </div>
+
+           </form>
+
+       </div>
+       <table class="table">
+           <thead>
+           <tr>
+               <th scope="col">STT</th>
+               <th scope="col">Tên tỉnh</th>
+               <th></th>
+               <th></th>
+
+           </tr>
+           </thead>
+           <tbody>
+           @forelse($cities as $key =>$item)
+           <tr>
+               <td scope="row">{{$item->id}}</td>
+               <td scope="row">{{$item->name}}</td>
+               <td><a class=" btn btn-success " href="{{route('cities.edit',$item->id)}}" >Sua</a></td>
+               <td><a class=" btn btn-secondary " onclick="return confirm('Bạn chắc chắn muốn xóa?')">xoa</a></td>
+
+           </tr>
+
+           @empty
+           <p>khong du lieu</p>
+           @endforelse
+
+           </tbody>
+       </table>
+       {{ $cities->links() }}
+
+
+   </div>
+@stop

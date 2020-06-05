@@ -1,1 +1,4 @@
 <?php
+return [
+    'customer' => 'customer'
+    ];
